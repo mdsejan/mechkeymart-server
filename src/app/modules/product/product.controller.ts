@@ -26,15 +26,33 @@ const createProduct = catchAsync(async (req, res) => {
 });
 
 // ===> Get All Products <===
-const getAllProducts = catchAsync(async (req, res) => {
-  const result = await productServices.getBookingsFromDB();
+// const getAllProducts = catchAsync(async (req, res) => {
+//   const result = await productServices.getProductsFromDB();
+//   if (!result || result.length === 0) {
+//     return noDataFound(res);
+//   }
+//   sendResponse(res, {
+//     success: true,
+//     statusCode: httpStatus.OK,
+//     message: "All Products retrieved successfully",
+//     data: result,
+//   });
+// });
+
+// ===> Get Products with Filtering, Searching, and Sorting <===
+const getProducts = catchAsync(async (req, res) => {
+  const query = req.query;
+
+  const result = await productServices.getProductsFromDB(query);
+
   if (!result || result.length === 0) {
     return noDataFound(res);
   }
+
   sendResponse(res, {
-    success: true,
     statusCode: httpStatus.OK,
-    message: "All Products retrieved successfully",
+    success: true,
+    message: "Products retrieved successfully",
     data: result,
   });
 });
@@ -78,7 +96,7 @@ const deleteProduct = catchAsync(async (req, res) => {
 
 export const productController = {
   createProduct,
-  getAllProducts,
+  getProducts,
   updateProduct,
   deleteProduct,
 };
