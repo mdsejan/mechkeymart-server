@@ -11,6 +11,7 @@ const productSchema = new Schema<IProduct>(
     price: { type: Number, required: true },
     rating: { type: Number, required: true, min: 0, max: 5 },
     description: { type: String, required: true },
+    isDeleted: { type: Boolean, default: false },
   },
   {
     timestamps: true,

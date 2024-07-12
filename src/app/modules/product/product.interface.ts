@@ -6,4 +6,5 @@ export interface IProduct {
   price: number;
   rating: number;
   description: string;
+  isDeleted: boolean;
 }
