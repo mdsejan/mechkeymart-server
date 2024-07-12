@@ -11,4 +11,7 @@ router.post(
   productController.createProduct
 );
 
+router.get("/", productController.getAllProducts);
+router.put("/:id", productController.updateProduct);
+
 export const ProductRoutes = router;

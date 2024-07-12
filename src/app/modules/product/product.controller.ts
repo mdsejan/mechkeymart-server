@@ -2,6 +2,7 @@ import httpStatus from "http-status";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { productServices } from "./product.service";
+import noDataFound from "../../error/noDataFound";
 
 // ===> Create Product <===
 const createProduct = catchAsync(async (req, res) => {
@@ -24,6 +25,40 @@ const createProduct = catchAsync(async (req, res) => {
   });
 });
 
+// ===> Get All Products <===
+const getAllProducts = catchAsync(async (req, res) => {
+  const result = await productServices.getBookingsFromDB();
+  if (!result || result.length === 0) {
+    return noDataFound(res);
+  }
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "All Products retrieved successfully",
+    data: result,
+  });
+});
+
+// ===> Update Product By Id <===
+const updateProduct = catchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  const result = await productServices.updateProductIntoDB(id, req.body);
+
+  if (!result) {
+    return noDataFound(res);
+  }
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Product updated successfully",
+    data: result,
+  });
+});
+
 export const productController = {
   createProduct,
+  getAllProducts,
+  updateProduct,
 };
