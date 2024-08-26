@@ -11,11 +11,11 @@ const createProductIntoDb = async (payload: IProduct) => {
   return result;
 };
 
-// ===> Get All Product From DB <===
-// const getBookingsFromDB = async () => {
-//   const result = await ProductModel.find({ isDeleted: false });
-//   return result;
-// };
+// ===> Get Product by id From DB <===
+const getProductByIdFromDB = async (id: string) => {
+  const result = await ProductModel.findOne({ _id: id });
+  return result;
+};
 
 // ===> Get All Products From DB with Filtering, Searching, and Sorting <===
 const getProductsFromDB = async (query: any) => {
@@ -80,4 +80,5 @@ export const productServices = {
   getProductsFromDB,
   updateProductIntoDB,
   deleteProductFromDB,
+  getProductByIdFromDB,
 };

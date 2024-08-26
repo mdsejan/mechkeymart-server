@@ -26,18 +26,22 @@ const createProduct = catchAsync(async (req, res) => {
 });
 
 // ===> Get All Products <===
-// const getAllProducts = catchAsync(async (req, res) => {
-//   const result = await productServices.getProductsFromDB();
-//   if (!result || result.length === 0) {
-//     return noDataFound(res);
-//   }
-//   sendResponse(res, {
-//     success: true,
-//     statusCode: httpStatus.OK,
-//     message: "All Products retrieved successfully",
-//     data: result,
-//   });
-// });
+const getProductById = catchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  const result = await productServices.getProductByIdFromDB(id);
+
+  if (!result) {
+    return noDataFound(res);
+  }
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Product Get successfully",
+    data: result,
+  });
+});
 
 // ===> Get Products with Filtering, Searching, and Sorting <===
 const getProducts = catchAsync(async (req, res) => {
@@ -97,6 +101,7 @@ const deleteProduct = catchAsync(async (req, res) => {
 export const productController = {
   createProduct,
   getProducts,
+  getProductById,
   updateProduct,
   deleteProduct,
 };
