@@ -34,7 +34,8 @@ MechKeyMart is built using React, Redux, Mongoose, and Express. This e-commerce 
 
 ### Prerequisites
 
-- react (v18 or higher)
+- Node.js (v22.1.0 or higher)
+- npm (v10.7.0 or higher)
 
 ### Installation
 
